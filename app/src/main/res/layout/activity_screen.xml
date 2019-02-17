@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".presentation.intro.ScreenActivity">
+
+    <Button
+        android:id="@+id/buttonFinish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CDDC39"
+        android:text="Finish"
+        app:layout_anchor="@+id/container"
+        app:layout_anchorGravity="bottom|center"
+        android:onClick="onClickNextFinish"/>
+
+    <Button
+        android:id="@+id/buttonNext1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CDDC39"
+        android:text="Next"
+        app:layout_anchor="@+id/container"
+        app:layout_anchorGravity="bottom|center"
+        android:onClick="onClickNextFirst"/>
+    <Button
+        android:id="@+id/buttonNext2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CDDC39"
+        android:text="Next"
+        app:layout_anchor="@+id/container"
+        app:layout_anchorGravity="bottom|center"
+        android:onClick="onClickNextSecond"/>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+    </android.support.v4.view.ViewPager>
+
+</android.support.design.widget.CoordinatorLayout>
