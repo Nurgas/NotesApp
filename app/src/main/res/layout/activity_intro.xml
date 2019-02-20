@@ -28,8 +28,11 @@
         android:padding="20dp"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"/>
+
+
     <com.badoualy.stepperindicator.StepperIndicator
         android:id="@+id/intro_stepper"
+        android:layout_margin="16dp"
         android:layout_width="100dp"
         android:layout_height="30dp"
         app:stpi_stepCount="5"
@@ -41,7 +44,24 @@
         app:stpi_indicatorColor="@color/ms_black"
         app:layout_constraintTop_toTopOf="@+id/intro_next_btn"
         app:layout_constraintBottom_toBottomOf="@+id/intro_next_btn"
+        app:layout_constraintLeft_toRightOf="@id/intro_skip_btn"/>
+
+    <TextView
+        android:id="@+id/intro_skip_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:text="SKIP"
+        android:textColor="#2196F3"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="@+id/intro_next_btn"
+        app:layout_constraintBottom_toBottomOf="@+id/intro_next_btn"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="10dp"/>
+        android:background="?actionBarItemBackground"
+        android:textStyle="bold"
+        android:padding="20dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"/>
+
 
 </android.support.constraint.ConstraintLayout>
