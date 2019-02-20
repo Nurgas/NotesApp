@@ -1,8 +1,6 @@
-package kg.nurga.notesapp.presentation.intro;
+package kg.nurga.notesapp.presentation.screen;
 
 
-import android.content.Context;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import android.support.v4.app.Fragment;
@@ -10,9 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.transition.TransitionManager;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,7 +60,7 @@ public class ScreenActivity extends AppCompatActivity {
         Button buttonNextFirst = findViewById(R.id.buttonNext1);
         buttonNextFirst.setVisibility(View.INVISIBLE);
 
-        setContentView(R.layout.fragment_second);
+        setContentView(R.layout.fragment_second_intro_screen);
     }
 
     public void onClickNextSecond(View view) {
@@ -86,7 +81,7 @@ public class ScreenActivity extends AppCompatActivity {
 
             switch (position){
                 case 0:
-                    return FirstFragment.newInstance("First Fragment");
+                    return FirstFragmentIntroScreen.newInstance("First Fragment");
                 case 1:
                     return SecondFragment.newInstance("SecondFragment");
                 case 2:

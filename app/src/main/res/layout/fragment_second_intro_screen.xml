@@ -4,12 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="80dp"
-    android:background="#673AB7"
-    tools:context=".presentation.intro.ThirdFragment">
+    android:background="#2196F3"
+    tools:context=".presentation.screen.SecondFragment">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/imageLev"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/lev"/>
 
 </FrameLayout>

@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="80dp"
-    android:background="#2196F3"
-    tools:context=".presentation.intro.SecondFragment">
+    android:background="#673AB7"
+    tools:context=".presentation.screen.ThirdFragment">
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
