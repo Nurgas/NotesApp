@@ -1,9 +1,7 @@
 package kg.nurga.notesapp.presentation.intro;
 
 
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.SharedMemory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,9 +14,11 @@ import android.widget.TextView;
 
 import com.badoualy.stepperindicator.StepperIndicator;
 
+import kg.nurga.notesapp.App;
 import kg.nurga.notesapp.R;
-import kg.nurga.notesapp.presentation.launch.LaunchActivity;
 import kg.nurga.notesapp.presentation.main.MainActivity;
+import kg.nurga.util.SharedStorage;
+import kg.nurga.util.SharedStorageImpl;
 
 
 public class IntroActivity extends AppCompatActivity implements View.OnClickListener {
@@ -30,12 +30,28 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
 
     private SharedPreferences mSharedPreferences;
 
+    private static String PREF_FIRST_LAUNCH = "first_launch";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
-        init();
+
+
+
+
+        mSharedPreferences = getSharedPreferences("shared_prefs", MODE_PRIVATE);
+        if(isFirstLaunch()) {
+            setContentView(R.layout.activity_intro);
+
+            firstLaunch();
+
+            init();
+        } else {
+            MainActivity.start(this);
+            finish();
+        }
     }
+
 
     private void init() {
         initViewPager();
@@ -43,9 +59,6 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         nextBtn.setOnClickListener(this);
         skipBtn = findViewById(R.id.intro_skip_btn);
         skipBtn.setOnClickListener(this);
-
-        mSharedPreferences = getSharedPreferences("settings", MODE_PRIVATE);
-
     }
 
     private void initViewPager(){
@@ -60,17 +73,11 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int i, float v, int i1) {
-
             }
-
 
             @Override
             public void onPageSelected(int i) {
-                String btnText = "Next";
-                if(i==2) {
-                    btnText = "Finish";
-                }
-                nextBtn.setText(btnText);
+                onPageChanged(i);
             }
 
             @Override
@@ -82,6 +89,30 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         mStepperIndicator.setViewPager(mViewPager, mIntroAdapter.getCount());
     }
 
+    private boolean isFirstLaunch() {
+        if (mSharedPreferences.contains(PREF_FIRST_LAUNCH)) {
+            return mSharedPreferences.getBoolean(PREF_FIRST_LAUNCH, true);
+        } else {
+            return true;
+        }
+    }
+
+    private void firstLaunch() {
+        mSharedPreferences.edit()
+                .putBoolean(PREF_FIRST_LAUNCH, false)
+                .apply();
+    }
+
+    private void onPageChanged(int position) {
+        String btnText = "Next";
+        if (position == 2) {
+            btnText = "Finish";
+        }
+        nextBtn.setText(btnText);
+    }
+
+
+
     private void onNextClick() {
         if(mViewPager.getCurrentItem()==mIntroAdapter.getCount()-1){
             MainActivity.start(this);
@@ -89,7 +120,6 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         } else {
             mViewPager.setCurrentItem(mViewPager.getCurrentItem()+1);
         }
-
     }
 
     @Override
@@ -97,16 +127,10 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.intro_next_btn:
                 onNextClick();
-                mSharedPreferences.edit().putBoolean("tutorial",true).apply();
-                Intent intent = new Intent(v.getContext(), LaunchActivity.class);
-                v.getContext().startActivity(intent);
-                finish();
+
                 break;
             case R.id.intro_skip_btn:
                 MainActivity.start(this);
-                mSharedPreferences.edit().putBoolean("tutorial",true).apply();
-                Intent intent1 = new Intent(v.getContext(), LaunchActivity.class);
-                v.getContext().startActivity(intent1);
                 finish();
         }
     }
@@ -134,7 +158,6 @@ public class IntroActivity extends AppCompatActivity implements View.OnClickList
                     break;
             }
             return fragment;
-
         }
 
         @Override
